@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Mapa</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css" />
+    <style>
+        #map { height: 400px; } /* Tamanho do mapa */
+    </style>
+</head>
+<body>
+
+<h1>Meu Mapa OpenStreetMap</h1>
+<div id="map"></div>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+<script>
+    // Criando o mapa
+    var map = L.map('map').setView([51.505, -0.09], 13); // Posição inicial do mapa
+
+    // Adicionando a camada de tiles do OpenStreetMap
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Criando uma rota entre dois pontos
+    L.Routing.control({
+        waypoints: [
+            L.latLng(51.505, -0.09), // Ponto de partida
+            L.latLng(51.515, -0.1)   // Ponto de destino
+        ]
+    }).addTo(map);
+</script>
+
+</body>
+</html>
