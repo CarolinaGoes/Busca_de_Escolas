@@ -13,4 +13,7 @@ indice de violencia
 
 listar escolas por localidade
 exibir perfilda escola
+<<<<<<< HEAD
 
+=======
+>>>>>>> d114eef9f41d5181af28e9ad7913dca069c00223
