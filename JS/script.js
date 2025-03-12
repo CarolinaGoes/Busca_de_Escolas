@@ -30,21 +30,33 @@ document.addEventListener("DOMContentLoaded", function () {
       console.error("A div de resultados não foi encontrada em schools.html");
     }
   }
+<<<<<<< HEAD
 });  //
+=======
+});
+>>>>>>> d114eef9f41d5181af28e9ad7913dca069c00223
 
 function showMap(address) {
   // API de Geocodificação do OpenStreetMap (Nominatim)
   const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`;
 
   // Criar o mapa
+<<<<<<< HEAD
   let map = L.map("map").setView([0, 0], 1); // Set initial view to avoid blank map
+=======
+  let map = L.map("map");
+>>>>>>> d114eef9f41d5181af28e9ad7913dca069c00223
 
   // Adicionar camada do OpenStreetMap
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution: "© OpenStreetMap contributors"
   }).addTo(map);
 
+<<<<<<< HEAD
   fetch(url) // Corrected the fetch URL
+=======
+  fetch(url)
+>>>>>>> d114eef9f41d5181af28e9ad7913dca069c00223
     .then(response => response.json())
     .then(data => {
       if (data.length > 0) {
@@ -75,7 +87,11 @@ function addMarkers(map) {
   fetch("api.php")
     .then(response => response.json())
     .then(data => {
+<<<<<<< HEAD
       data.forEach(function(ENDEREÇO) {
+=======
+      data.forEach(function(endereco) {
+>>>>>>> d114eef9f41d5181af28e9ad7913dca069c00223
         // Realiza a geocodificação dos endereços do banco de dados
         fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(endereco.endereco)}`)
           .then(response => response.json())
@@ -87,7 +103,11 @@ function addMarkers(map) {
               // Criar marcador para cada endereço do banco de dados
               L.marker([lat, lon])
                 .addTo(map)
+<<<<<<< HEAD
                 .bindPopup(`<b>${ENDEREÇO.nome}</b><br>${ENDEREÇO.ENDEREÇO}`);
+=======
+                .bindPopup(`<b>${endereco.nome}</b><br>${endereco.endereco}`);
+>>>>>>> d114eef9f41d5181af28e9ad7913dca069c00223
             }
           })
           .catch(error => console.error('Erro na geocodificação:', error));
