@@ -45,11 +45,25 @@ button:hover {
   margin: 50px;
   width: 50%;
 }
+input::active{
+  border:2px solid #011d0bd0;
+}
+
+input::placeholder{
+  color:#011d0bd0;
+}
 
 input{
   font-size: 22px;
-  background-color: #023d16;
+  background-color: #023d16b7;
   color: black;
-
+  border:0px;
+  border-radius: 5px;
+  padding:2px;
+  color:#011809;
 }
 
+#map {
+  height: 400px; /* Ajuste o tamanho conforme necessário */
+  width: 100%;
+}
