@@ -45,15 +45,16 @@ button:hover {
   margin: 50px;
   width: 50%;
 }
-input::active{
+
+input::active {
   border:2px solid #011d0bd0;
 }
 
-input::placeholder{
+input::placeholder {
   color:#011d0bd0;
 }
 
-input{
+input {
   font-size: 22px;
   background-color: #023d16b7;
   color: black;
@@ -64,12 +65,32 @@ input{
 }
 
 #map {
-<<<<<<< HEAD
-  height: 400px; /* Ajuste o tamanho conforme necessário */
-  width: 100%;
-=======
-  height: 400px; /* Define altura do mapa */
+  height: 400px;
   width: 100%;
   margin-top: 20px;
->>>>>>> d114eef9f41d5181af28e9ad7913dca069c00223
 }
+
+.marker {
+  // ...existing code...
+}
+
+.marker:hover {
+  // ...existing code...
+}
+
+.marker-cei-aloysio {
+  background-color: #128818; /* Changed color */
+  border: 1px solid #ffffff;
+  border-radius: 50%;
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+
+.marker-cei-aloysio:hover {
+  background-color: #2bff00; /* Changed hover color */
+  border-color: #000000;
+}
+
+
