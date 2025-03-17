@@ -16,8 +16,18 @@ function initMap() {
         attribution: '&copy; OpenStreetMap contributors'
     }).addTo(map);
 
-    // Add the permanent marker for CEI ALOYSIO DE MENEZES GREENHALG, DEPUTADO
-    addPermanentMarker(map, -23.55052, -46.633308, 'CEI ALOYSIO DE MENEZES GREENHALG, DEPUTADO');
+    // Fetch the address from the backend and add a marker
+    fetch('http://localhost:3000/address')
+        .then(response => response.json())
+        .then(data => {
+            const { name, address } = data;
+            geocodeAddress(address, (lat, lon) => {
+                addPermanentMarker(map, lat, lon, name);
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching address from backend:', error);
+        });
 
     if (address) {
         // Geocode the address and add a marker
@@ -51,6 +61,22 @@ function addPermanentMarker(map, lat, lon, name) {
     }).addTo(map)
     .bindPopup(`<a href="https://www.openstreetmap.org/?mlat=${lat}&mlon=${lon}#map=15/${lat}/${lon}" target="_blank">${name}</a>`)
     .openPopup();
+}
+
+function geocodeAddress(address, callback) {
+    fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.length > 0) {
+                const { lat, lon } = data[0];
+                callback(lat, lon);
+            } else {
+                console.error('Endereço não encontrado:', address);
+            }
+        })
+        .catch(error => {
+            console.error('Erro ao buscar o endereço:', error);
+        });
 }
 
 document.addEventListener('DOMContentLoaded', initMap);
