@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Busca de Escolas</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        /* Certifique-se de que o mapa tenha tamanho definido */
+        #map {
+            height: 500px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <!-- Campo de entrada e botão para buscar endereço -->
+    <input type="text" id="address-input" placeholder="Digite um endereço">
+    <button id="search-button">Buscar</button>
+
+    <!-- Div para o mapa -->
+    <div id="map"></div>
+
+    <!-- Scripts do Leaflet -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="./JS/script.js"></script>
+</body>
+</html>

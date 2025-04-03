@@ -56,12 +56,11 @@ input::placeholder {
 
 input {
   font-size: 22px;
-  background-color: #023d16b7;
-  color: black;
+  background-color: #03531ed2;
   border:0px;
   border-radius: 5px;
   padding:2px;
-  color:#011809;
+  color:#000502;
 }
 
 #map {
@@ -79,7 +78,7 @@ input {
 }
 
 .marker-cei-aloysio {
-  background-color: #128818; /* Changed color */
+  background-color: #128818; 
   border: 1px solid #ffffff;
   border-radius: 50%;
   width: 15px;
@@ -88,8 +87,8 @@ input {
   transform: translate(-50%, -50%);
 }
 
-.marker-cei-aloysio:hover {
-  background-color: #2bff00; /* Changed hover color */
+.marker:hover {
+  background-color: #2bff00;
   border-color: #000000;
 }
 

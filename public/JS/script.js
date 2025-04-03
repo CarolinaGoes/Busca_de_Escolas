@@ -1,82 +1,44 @@
-function searchSchools() {
-    const address = document.getElementById('address').value;
-    if (address) {
-        window.location.href = `/public/pages/schools.html?address=${encodeURIComponent(address)}`;
-    } else {
-        alert('Por favor, digite um endereço.');
-    }
-}
-
-// Function to initialize the map and mark the address
+// Function to initialize the map
 function initMap() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const address = urlParams.get('address');
-    const map = L.map('map').setView([-23.55052, -46.633308], 13); 
+    const map = L.map('map').setView([-23.55052, -46.633308], 12); // Default to São Paulo
+
+    // Add OpenStreetMap tiles
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; OpenStreetMap contributors'
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 
-    // Fetch the address from the backend and add a marker
-    fetch('http://localhost:3000/address')
-        .then(response => response.json())
-        .then(data => {
-            const { ESCOLA, ENDERECO } = data;
-            geocodeAddress(ENDERECO, (lat, lon) => {
-                addPermanentMarker(map, lat, lon, name);
-            });
- })
-        .catch(error => {
-            console.error('Error fetching ENDERECO from backend:', error);
-        });
+    const input = document.getElementById("address-input");
+    const searchButton = document.getElementById("search-button");
 
-    if (addre) {
-        // Geocode the address and add a marker
-        fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`)
-            .then(response => response.json())
-            .then(data => {
-                if (data.length > 0) {
-                    const { lat, lon } = data[0];
-                    map.setView([lat, lon], 15);
-                    const marker = L.marker([lat, lon]).addTo(map)
-                        .bindPopup(`<a href="https://www.openstreetmap.org/?mlat=${lat}&mlon=${lon}#map=15/${lat}/${lon}" target="_blank">${address}</a>`)
-                        .openPopup();
-                } else {
-                    alert('Endereço não encontrado.');
-                }
-            })
-            .catch(error => {
-                console.error('Erro ao buscar o endereço:', error);
-                alert('Erro ao buscar o endereço.');
-            });
-    }
+    searchButton.addEventListener("click", () => {
+        const address = input.value;
+        if (address) {
+            geocodeAddress(map, address);
+        }
+    });
 }
 
-// Function to add a permanent marker for a specific address
-function addPermanentMarker(map, lat, lon, name) {
-    const marker = L.marker([lat, lon], {
-        icon: L.divIcon({
-            className: 'custom-marker',
-            html: '<div class="marker-cei-aloysio"></div>'
-        })
-    }).addTo(map)
-    .bindPopup(`<a href="https://www.openstreetmap.org/?mlat=${lat}&mlon=${lon}#map=15/${lat}/${lon}" target="_blank">${name}</a>`)
-    .openPopup();
-}
-
-function geocodeAddress(address, callback) {
-    fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`)
+// Function to geocode an address and update the map
+function geocodeAddress(map, address) {
+    // Use Nominatim API for geocoding
+    const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`;
+    fetch(url)
         .then(response => response.json())
         .then(data => {
             if (data.length > 0) {
                 const { lat, lon } = data[0];
-                callback(lat, lon);
+                const latLng = [parseFloat(lat), parseFloat(lon)];
+                map.setView(latLng, 15); // Center the map on the result
+                L.marker(latLng).addTo(map); // Add a marker at the location
             } else {
-                console.error('Endereço não encontrado:', address);
+                alert("Endereço não encontrado.");
             }
         })
         .catch(error => {
-            console.error('Erro ao buscar o endereço:', error);
+            console.error("Erro ao buscar o endereço:", error);
+            alert("Ocorreu um erro ao buscar o endereço.");
         });
 }
 
-document.addEventListener('DOMContentLoaded', initMap);
+// Initialize the map when the page loads
+document.addEventListener("DOMContentLoaded", initMap);
