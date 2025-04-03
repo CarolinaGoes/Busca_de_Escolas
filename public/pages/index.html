@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Busca de Escolas</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="address-input">
+    <h1>Busca de Escolas</h1>
+    <input type="text" id="address-input" placeholder="Digite o endereço" required>
+    <button id="search-button">Buscar</button>
+    <p>Resultado para o endereço:</p>
+    <div id="results"></div>
+    <div id="map"></div> 
+  </div>
+  <div id="address"></div>
+  <script src="../JS/script.js"></script> 
+  <script>
+    document.addEventListener('DOMContentLoaded', initMap);
+  </script>
+</body>
+</html>

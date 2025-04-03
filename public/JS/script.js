@@ -11,7 +11,7 @@ function searchSchools() {
 function initMap() {
     const urlParams = new URLSearchParams(window.location.search);
     const address = urlParams.get('address');
-    const map = L.map('map').setView([-23.55052, -46.633308], 13); // Default to São Paulo coordinates
+    const map = L.map('map').setView([-23.55052, -46.633308], 13); 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; OpenStreetMap contributors'
     }).addTo(map);
@@ -20,16 +20,16 @@ function initMap() {
     fetch('http://localhost:3000/address')
         .then(response => response.json())
         .then(data => {
-            const { name, address } = data;
-            geocodeAddress(address, (lat, lon) => {
+            const { ESCOLA, ENDERECO } = data;
+            geocodeAddress(ENDERECO, (lat, lon) => {
                 addPermanentMarker(map, lat, lon, name);
             });
-        })
+ })
         .catch(error => {
-            console.error('Error fetching address from backend:', error);
+            console.error('Error fetching ENDERECO from backend:', error);
         });
 
-    if (address) {
+    if (addre) {
         // Geocode the address and add a marker
         fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`)
             .then(response => response.json())
